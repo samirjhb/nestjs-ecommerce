@@ -7,49 +7,80 @@ import { FilterProductDTO } from './dto/filter-product.dto';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel('Product') private readonly productModel: Model<ProductDocument>) { }
+  constructor(
+    @InjectModel('Product')
+    private readonly productModel: Model<ProductDocument>,
+  ) {}
 
-  async getFilteredProducts(filterProductDTO: FilterProductDTO): Promise<Product[]> {
+  async getFilteredProducts(
+    filterProductDTO: FilterProductDTO,
+  ): Promise<Product[]> {
     const { category, search } = filterProductDTO;
     let products = await this.getAllProducts();
 
     if (search) {
-      products = products.filter(product => 
-        product.name.includes(search) ||
-        product.description.includes(search)
+      products = products.filter(
+        (product) =>
+          product.name.includes(search) || product.description.includes(search),
       );
     }
 
     if (category) {
-      products = products.filter(product => product.category === category)
+      products = products.filter((product) => product.category === category);
     }
 
     return products;
   }
 
   async getAllProducts(): Promise<Product[]> {
-    const products = await this.productModel.find().exec();
-    return products;
+    try {
+      const products = await this.productModel.find().exec();
+      return products;
+    } catch (error) {
+      console.log('Error en el servidor: ', error);
+    }
   }
 
   async getProduct(id: string): Promise<Product> {
-    const product = await this.productModel.findById(id).exec();
-    return product;
+    try {
+      const product = await this.productModel.findById(id).exec();
+      return product;
+    } catch (error) {
+      console.log('Error en el servidor: ', error);
+    }
   }
 
   async addProduct(createProductDTO: CreateProductDTO): Promise<Product> {
-    const newProduct = await this.productModel.create(createProductDTO);
-    return newProduct.save();
+    try {
+      const newProduct = await this.productModel.create(createProductDTO);
+      return newProduct.save();
+    } catch (error) {
+      console.log('Error en el servicio: ', error._message);
+    }
   }
 
-  async updateProduct(id: string, createProductDTO: CreateProductDTO): Promise<Product> {
-    const updatedProduct = await this.productModel
-      .findByIdAndUpdate(id, createProductDTO, { new: true });
-    return updatedProduct;
+  async updateProduct(
+    id: string,
+    createProductDTO: CreateProductDTO,
+  ): Promise<Product> {
+    try {
+      const updatedProduct = await this.productModel.findByIdAndUpdate(
+        id,
+        createProductDTO,
+        { new: true },
+      );
+      return updatedProduct;
+    } catch (error) {
+      console.log('Error en el servicio: ', error);
+    }
   }
 
   async deleteProduct(id: string): Promise<any> {
-    const deletedProduct = await this.productModel.findByIdAndRemove(id);
-    return deletedProduct;
+    try {
+      const deletedProduct = await this.productModel.findByIdAndRemove(id);
+      return deletedProduct;
+    } catch (error) {
+      console.log('Error en el servicio:', error);
+    }
   }
 }
