@@ -2,7 +2,7 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-## Description
+## Descripcion
 
 Crear un nuevo proyecto Nest para nuestra aplicación de comercio electrónico
 
@@ -11,19 +11,29 @@ Crear un nuevo proyecto Nest para nuestra aplicación de comercio electrónico
 
 Ruta de Url de la api
 
-* POST store/products/ — agregar nuevo producto
-* GET store/products/ — buscar todo los  productos
-* GET store/products/:id — buscar producto por id
-* PUT store/products/:id — editar prodoucto por id
-* DELETE store/products/:id — eleminar producto por id
+* POST store/products/ — Agregar nuevo producto
+* GET store/products/ — Buscar todo los  productos
+* GET store/products/:id — Buscar producto por id
+* PUT store/products/:id — Editar prodoucto por id
+* DELETE store/products/:id — Eliminar producto por id
 
-## Installation
+
+-Creacion de metodos de controlador de autenticacion y usuario
+
+Ruta de Url de la api
+
+* POST auth/register --> Se utiliza para crear un nuevo usuario
+* POST auth/login --> Se utiliza para iniciar sesión en un usuario registrado
+* GET auth/user --> Se utiliza para acceder al perfil del usuario
+* GET auth/admin --> Se utiliza para acceder al perfil del admininistrador
+
+## Instalacion
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Ejecutando la aplicación
 
 ```bash
 # development
@@ -49,14 +59,23 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Packages del proyecto 
+
+* npm install --save @nestjs/mongoose mongoose ---> MongoDB
+* npm install bcrypt ---> bcrypt
+* npm install -D @types/bcrypt ---> @types/bcrypt
+* npm install --save @nestjs/passport passport passport-local ---> Libreria  passport
+* npm install --save-dev @types/passport-local ---> Libreria  passport
+* npm install dotenv ---> Dotenv
+* npm install --save @nestjs/jwt passport-jwt ---> Estrategia de autenticación utilizando JSON Web Tokens (JWT).
+* npm install --save-dev @types/passport-jwt ---> Estrategia de autenticación utilizando JSON Web Tokens (JWT).
 
 
-## Stay in touch
+## Mantente en contacto
 
 - Author - [Samir Hadechni]
 
 
-## License
+ 
 
 
